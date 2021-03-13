@@ -1,0 +1,45 @@
+<div class="header-menu">
+    <ul>
+        <?php
+        /*
+        <?php if (isset($isCatalog) && (bool) $isCatalog): ?>
+        <li id="list-view-button-wrapper"
+            class="list-view-button-wrapper hidden">
+            <a href="#list" id="list-view-button" class="list-view-button">
+                <i class="fa fa-th-list" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li id="greed-view-button-wrapper"
+            class="greed-view-button-wrapper">
+            <a href="#greed" id="greed-view-button" class="greed-view-button">
+                <i class="fa fa-th" aria-hidden="true"></i>
+            </a>
+        </li>
+        <?php endif; ?>
+        */
+        ?>
+        <?php if($isSignedIn): ?>
+        <li>
+            <a href="/file/add/">
+                <i class="fa fa-upload" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li>
+            <a href="/cat/add/">
+                <i class="fa fa-folder" aria-hidden="true"></i>
+            </a>
+        </li>        
+        <li>
+            <a href="/logout/">
+                <i class="fa fa-sign-out"></i>
+            </a>
+        </li>
+        <?php else: ?>
+        <li>
+            <a href="/login/">
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </a>
+        </li>
+        <?php endif; ?>
+    </ul>
+</div>

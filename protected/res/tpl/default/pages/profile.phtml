@@ -1,0 +1,31 @@
+<div class="content">
+    <h1 class="page-title"><?=__t('Profile');?></h1>
+    <?php if(!empty($formData['errors'])): ?>
+    <div class="form-errors">
+        <ul>
+            <?php foreach ($formData['errors'] as $formError): ?>
+            <li><?=__t($formError);?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <dir class="clear"></dir>
+    <?php endif; ?>
+    <form action="/profile/" enctype="multipart/form-data" method="POST">
+        <div>
+            <input type="password"
+                   name="password"
+                   placeholder="<?=__t('New Password');?>"
+                   value="<?=$formData['password'];?>">
+        </div>
+        <div>
+            <input type="password"
+                   name="password_check"
+                   placeholder="<?=__t('Repeat New Password');?>"
+                   value="<?=$formData['password_check'];?>">
+        </div>
+        <div>
+            <input type="submit" value="<?=__t('Save');?>">
+        </div>
+        <dir class="clear"></dir>
+    </form>
+</div>

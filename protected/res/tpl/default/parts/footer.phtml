@@ -1,0 +1,9 @@
+<?php if(!isset($ajax) || !$ajax): ?>
+        <div class="footer">
+            <span class="copyright"><?=$meta['copyright'];?></span><a href="/page/about/"><?=__t('About');?></a><a href="/page/contact/"><?=__t('Contact');?></a><?php if($isSignedIn): ?><a href="/profile/"><?=__t('Profile');?></a><?php endif; ?>
+        </div>
+    </div>
+    <?php __part('js'); ?>
+<?php endif; ?>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<div class="content">
+    <h1 class="page-title"><?=__t('Login');?></h1>
+    <?php if(!empty($formData['errors'])): ?>
+    <div class="form-errors">
+        <ul>
+            <?php foreach ($formData['errors'] as $formError): ?>
+            <li><?=__t($formError);?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <dir class="clear"></dir>
+    <?php endif; ?>
+    <form action="/login/" method="POST">
+        <div>
+            <input type="text"
+                   name="email"
+                   placeholder="<?=__t('Email');?>"
+                   value="<?=$formData['email'];?>">
+        </div>
+        <div>
+            <input type="password"
+                   name="password"
+                   placeholder="<?=__t('Password');?>"
+                   value="<?=$formData['password'];?>">
+        </div>
+        <div>
+            <input type="submit" value="<?=__t('Login');?>">
+        </div>
+        <dir class="clear"></dir>
+    </form>
+</div>

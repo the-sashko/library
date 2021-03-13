@@ -1,0 +1,30 @@
+<?php if(!isset($ajax) || !$ajax): ?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?=__t($meta['title']);?></title>
+    <?php __part('meta'); ?>
+    <!--[if lt IE 9]>
+        <script src="/assets/js/html5shiv.min.js"></script>
+    <![endif]-->
+    <?php __part('css'); ?>
+</head>
+<body>
+<?php endif; ?>
+    <div class="wrapper">
+        <?php if(!isset($ajax) || !$ajax): ?>
+        <div class="header">
+            <?php if(isset($isMainPage) && $isMainPage): ?>
+            <img src="/assets/img/logo.png" class="logo"><h1 class="site-title"><?=__t($meta['site_name']);?></h1>
+            <?php else: ?>
+                <a href="/"><img src="/assets/img/logo.png" class="logo"><span href="/" class="site-title"><?=__t($meta['site_name']);?></span></a>
+            <?php endif; ?>
+            <?php __part('menu'); ?>
+        </div>
+        <div class="clear"></div>
+            <?php if(!isset($isMainPage) || !$isMainPage): ?>
+        <div class="navigation">
+            <?=$breadcrumbs;?>
+        </div>
+            <?php endif;?>
+        <?php endif; ?>

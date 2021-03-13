@@ -1,0 +1,101 @@
+<?php if(isset($currentCategory) && !empty($currentCategory)): ?>
+<h1 class="category-title"><?=$currentCategory->getTitle();?></h1>
+<?php endif;?>
+<div id="file-manager" class="file-manager-list">
+    <ul>
+        <?php
+            if(empty($categories) && empty($files)):
+        ?>
+        <li>
+            <div>
+                <?=__t('Empty…');?>
+            </div>
+        </li>
+        <?php else: ?>
+        <li class="file-manager-header">
+            <div class="file-manager-item-content">
+                <div class="file-manager-header-title">
+                    <?=__t('Name');?>
+                </div>
+                <div class="file-manager-header-cdate">
+                    <?=__t('Creared At');?>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </li>
+            <?php
+                if(isset($currentCategory) && !empty($currentCategory)):
+            ?>
+        <li class="file-list-item"
+            data-url="<?=$currentCategory->getParentLink();?>">
+            <div class="file-manager-item-content">
+                <a href="<?=$currentCategory->getParentLink();?>">
+                    <img src="/assets/img/dir-up.png">
+                    <h3><?=__t('Back');?></h3>
+                </a>
+                <div class="clear"></div>
+            </div>
+        </li>
+            <?php
+                endif;
+            ?>
+        <?php endif; ?>
+        <?php if (!empty($categories)): ?>
+            <?php foreach ($categories as $category): ?>
+                <?php
+                    if($category->getFilesCount() > 0):
+                ?>
+        <li class="file-list-item" data-url="<?=$category->getLink();?>">
+            <div class="file-manager-item-content">
+                <a href="<?=$category->getLink();?>">
+                    <img src="/assets/img/dir.png">
+                    <h3><?=$category->getTitle();?></h3>
+                </a>
+                <div class="file-meta">
+                    <div class="file-cdate">
+                        <?=$category->getCdate();?>
+                    </div>
+                    <div class="file-controls">
+                        <?php if($isSignedIn): ?>
+                            <a data-fancybox data-type="ajax" data-src="<?=$category->getAjaxLink();?>" href="javascript:;" class="file-controls-info"><i class="fa fa-info-circle" aria-hidden="true"></i></a><a href="<?=$category->getEditLink();?>" class="file-controls-edit"><i class="fa fa-edit" aria-hidden="true"></i></a><a href="<?=$category->getRemoveLink();?>" class="file-controls-remove"><i class="fa fa-remove" aria-hidden="true"></i></a>
+                        <?php else: ?>
+                            <a data-fancybox data-type="ajax" data-src="<?=$category->getAjaxLink();?>" href="javascript:;" class="file-controls-info"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </li>
+                <?php
+                    endif;
+                ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <?php if (!empty($files)): ?>
+            <?php foreach ($files as $file): ?>
+        <li class="file-list-item" data-url="<?=$file->getLink();?>">
+            <div class="file-manager-item-content">
+                <a href="<?=$file->getLink();?>">
+                    <img src="/assets/img/file.png">
+                    <h3><?=$file->getTitle();?></h3>
+                </a>
+                <div class="file-meta">
+                    <div class="file-cdate">
+                        <?=$file->getCdate();?>
+                    </div>
+                    <div class="file-controls">
+                        <?php if($isSignedIn): ?>
+                            <a data-fancybox data-type="ajax" data-src="<?=$file->getAjaxLink();?>" href="javascript:;" class="file-controls-info"><i class="fa fa-info-circle" aria-hidden="true"></i></a><a href="<?=$file->getEditLink();?>" class="file-controls-edit"><i class="fa fa-edit" aria-hidden="true"></i></a><a href="<?=$file->getRemoveLink();?>" class="file-controls-remove"><i class="fa fa-remove" aria-hidden="true"></i></a>
+                        <?php else: ?>
+                            <a data-fancybox data-type="ajax" data-src="<?=$file->getAjaxLink();?>" href="javascript:;" class="file-controls-info"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </li>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </ul>
+    <div class="clear"></div>
+</div>

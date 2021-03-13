@@ -1,0 +1,84 @@
+<div class="content">
+    <h1 class="page-title"><?=__t(end($pagePath));?></h1>
+    <?php if(!empty($formData['errors'])): ?>
+    <div class="form-errors">
+        <ul>
+            <?php foreach ($formData['errors'] as $formError): ?>
+            <li><?=__t($formError);?></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <dir class="clear"></dir>
+    <?php endif; ?>
+    <form action="<?=$formAction;?>" enctype="multipart/form-data" method="POST">
+        <div>
+            <input type="text"
+                   name="title"
+                   placeholder="<?=__t('Full Title');?>"
+                   value="<?=$formData['title'];?>">
+        </div>
+        <div>
+            <input type="text"
+                   name="short_title"
+                   placeholder="<?=__t('Short Title');?>"
+                   value="<?=$formData['short_title'];?>">
+        </div>
+        <div>
+            <input type="text"
+                   name="slug"
+                   placeholder="<?=__t('Slug');?>"
+                   value="<?=$formData['slug'];?>">
+        </div>
+        <?php if(isset($filePath)): ?>
+        <div>
+            <a href="<?=$filePath;?>">
+                <i class="fa fa-link"></i>
+                <?=__t('Uploaded File');?>
+            </a>
+        </div>
+        <?php else: ?>
+        <div class="form-input-file">
+            <span>
+                <i class="fa fa-upload" aria-hidden="true"></i>
+                <?=__t('Upload File');?>
+            </span>
+            <input type="file" name="file">
+        </div>
+        <?php endif; ?>
+        <?php if(!empty($categories)): ?>
+        <div>
+            <select name="id_category">
+                <?php if (empty($formData['id_category'])): ?>
+                <option disabled selected><?=__t('Select Category');?></option>
+                <?php else: ?>
+                <option disabled><?=__t('Select Category');?></option>
+                <?php endif; ?>
+                <?php foreach ($categories as $category): ?>
+                    <?php
+                        if (
+                            $category->getId() == $formData['id_category']
+                        ):
+                    ?>
+                <option value="<?=$category->getId();?>" selected>
+                    <?=__t($category->getTitle());?>
+                </option>
+                    <?php else: ?>
+                <option value="<?=$category->getId();?>">
+                    <?=__t($category->getTitle());?>
+                </option>
+                    <?php endif; ?>
+                <?php endforeach;?>
+            </select>
+        </div>
+        <?php endif; ?>
+        <div>
+            <textarea name="description"
+                      placeholder="Description"
+                      rows="5"><?=$formData['description'];?></textarea>
+        </div>
+        <div>
+            <input type="submit" value="<?=__t('Save');?>">
+        </div>
+        <dir class="clear"></dir>
+    </form>
+</div>

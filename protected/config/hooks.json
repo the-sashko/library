@@ -1,0 +1,19 @@
+{
+    "onAfterControllerInit": [
+        {
+            "hook":   "user",
+            "method": "checkUser"
+        }
+    ],
+
+    "onBeforeRender": [
+        {
+            "hook":   "user",
+            "method": "checkUser"
+        },
+        {
+            "hook":   "language",
+            "method": "translatePagePath"
+        }
+    ]
+}

@@ -1,0 +1,34 @@
+<div class="content">
+    <div class="file-wrapper">
+        <h1 class="file-title"><?=$file->getTitle();?></h1>
+        <div class="file-header">
+            <img src="<?=$file->getPreviewPath();?>" class="file-preview">
+            <div class="file-links">
+                <img src="<?=$file->getQrPath();?>" class="file-qr">
+                <a href="<?=$file->getFilePath();?>"
+                   target="_blank"
+                   class="file-link-view">
+                    <span>
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </span>
+                    <?=__t('Read');?>
+                </a>
+                <a href="<?=$file->getFilePath();?>"
+                   target="_blank"
+                   class="file-link-download"
+                   download>
+                    <span>
+                        <i class="fa fa-download" aria-hidden="true"></i>
+                    </span>
+                    <?=__t('Download');?>
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="file-description">
+            <?php if(!empty($file->getDescription())): ?>
+                <?=$file->getDescription();?>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>

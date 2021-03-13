@@ -1,0 +1,13 @@
+<div class="ajax-wrapper">
+    <h1 class="ajax-title">
+        <?=__t('Category');?> «<?=__t($category->getTitle());?>»
+    </h1>
+    <div class="ajax-content">
+        <p>
+            <?=__t('Count Of Subcategories');?>: <?=$category->getChildrenCount();?>
+        </p>
+        <p>
+            <?=__t('Count Of Files');?>: <?=$category->getFilesCount();?>
+        </p>
+    </div>
+</div>

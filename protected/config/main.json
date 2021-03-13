@@ -1,0 +1,9 @@
+{
+    "site_name": "Хата-читальня",
+    "site_slogan": "Books",
+    "site_domain": "lib.sashko.me",
+    "site_protocol": "https",
+    "site_locale": "uk_UA",
+    "launch_date": "09.03.2021",
+    "admin_email": "inbox@sashko.me"
+}

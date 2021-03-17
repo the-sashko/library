@@ -10,7 +10,10 @@
     </div>
     <dir class="clear"></dir>
     <?php endif; ?>
-    <form action="<?=$formAction;?>" enctype="multipart/form-data" method="POST">
+    <form action="<?=$formAction;?>"
+          enctype="multipart/form-data"
+          method="POST"
+          id="file-form">
         <div>
             <input type="text"
                    name="title"
@@ -37,12 +40,14 @@
             </a>
         </div>
         <?php else: ?>
+        <div id="form-input-file-name" class="form-input-file-name">
+        </div>
         <div class="form-input-file">
             <span>
                 <i class="fa fa-upload" aria-hidden="true"></i>
                 <?=__t('Upload File');?>
             </span>
-            <input type="file" name="file">
+            <input type="file" name="file" id="file-form-input-file">
         </div>
         <?php endif; ?>
         <?php if(!empty($categories)): ?>

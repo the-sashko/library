@@ -275,7 +275,8 @@ textarea {
 }
 
 .file-title {
-    margin: 0;
+    margin:        0;
+    overflow-wrap: break-word;
 }
 
 .page-title {
@@ -290,46 +291,71 @@ textarea {
     margin: 0 0 -8px 0;
 }
 
-.ajax-file-wrapper {
-    width:      100%;
-    text-align: center;
+.file-header {
+    max-width: 750px;
 }
 
 .file-preview {
+    display: none;
+}
+
+.file-qr {
     display:    none;
     background: #FFF;
 }
 
-.file-link-view, .file-link-download {
-    display:        block;
+.file-links {
+    text-align: center;
+}
+
+.file-links > a {
+    color:          #fefae0;
+    display:        inline-block;
     margin:         8px 0 0 0;
-    padding:        4px;
+    padding:        4px 0;
     text-transform: uppercase;
     font-weight:    bold;
+    width:          100%;
     text-align:     center;
-    color:          #fefae0;
-    border-radius:  .25em;
     font-size:      12px;
 }
 
+.file-links > a:hover, .file-links > a:focus {
+    color: #fefae0;
+}
+
 .file-link-view {
-    border:     1px solid #254a78;
-    background: #476c9b;
+    border:        1px solid #254a78;
+    background:    #476c9b;
+    border-radius: .25em;
+}
+
+.file-link-view:hover {
+    border:        1px solid #032856;
+    border-radius: .25em;
+    background:    #254a78;
+}
+
+.file-link-view:focus {
+    border:        1px solid #254a78;
+    border-radius: .25em;
 }
 
 .file-link-download {
-    border:     1px solid #762225;
-    background: #984447;
+    border:        1px solid #762225;
+    background:    #984447;
+    border-radius: .25em;
 }
 
-.file-link-view:hover, .file-link-view:active {
-    color:  #fefae0;
-    border: 1px solid #254a78;
+.file-link-download:hover {
+    border:        1px solid #762225;
+    border-radius: .25em;
+    background:    #873336;
 }
 
-.file-link-download:hover, .file-link-download:active {
-    color:  #fefae0;
-    border: 1px solid #762225;
+.file-link-download:focus {
+    border:        1px solid #762225;
+    border-radius: .25em;
 }
 
 .file-link-view > span, .file-link-download > span {
@@ -362,6 +388,15 @@ textarea {
     list-style-type: none;
     font-weight:     bold;
     font-size:       13px;
+}
+
+.form-input-file-name {
+    font-weight:   bold;
+    color:         #6A6A6A;
+    overflow:      hidden;
+    text-overflow: ellipsis;
+    padding:       .125em;
+    display:       none;
 }
 
 .form-input-file {
@@ -434,9 +469,36 @@ textarea {
 .ajax-title {
     font-size:     20px;
     line-height:   36px;
-    margin:        0;
+    margin:        -8px 0 0 0;
     overflow-wrap: break-word;
     color:         #6A6A6A;
+}
+
+.ajax-wrapper {
+    width: 500px;
+}
+
+.ajax-file-wrapper {
+    width:      100%;
+    text-align: center;
+    margin:     16px 0 0 0;
+}
+
+.ajax-content {
+    margin:    16px 0 -8px 0;
+    font-size: 16px;
+    color:     #6A6A6A;
+}
+
+.ajax-content > p {
+    padding:     0;
+    margin:      0 0 -4px 0;
+    line-height: 32px;
+}
+
+.ajax-views {
+    font-size: 16px;
+    color:     #6A6A6A;
 }
 
 .footer {
@@ -473,8 +535,7 @@ textarea {
         text-align: center;
     }
 
-    .file-link-view, .file-link-download {
-        display:   inline-block;
+    .file-links > a {
         margin:    8px 0 0 0;
         width:     160px;
         font-size: 14px;
@@ -648,11 +709,10 @@ textarea {
     .file-preview {
         display: inline-block;
         margin:  8px 0 0 0;
-        padding: 8px;
         width:   200px;
     }
 
-    .file-link-view, .file-link-download {
+    .file-links > a {
         display:   inline-block;
         margin:    8px 4px 0 4px;
         width:     120px;
@@ -684,12 +744,6 @@ textarea {
     .footer a {
         margin: 0 8px 0 0;
     }
-
-    .copyright {
-        display: inline-block;
-        color:   #fefae0;
-        margin:  0 8px 0 0;
-    }
 }
 
 @media (min-width: 420px) {
@@ -715,13 +769,19 @@ textarea {
     .file-links {
         display: inline-block;
         padding: 8px 0 0 0;
-        margin:  8px 0 0 0;
     }
 
-    .file-link-view, .file-link-download {
+    .file-links > a {
         margin:  0 0 8px 0;
         display: block;
         width:   150px;
+    }
+
+    .file-qr {
+        display: block;
+        margin:  0 0 8px 0;
+        padding: 3px;
+        width:   160px;
     }
 
     .file-manager-greed {
@@ -771,6 +831,12 @@ textarea {
         overflow-wrap: anywhere;
         text-align:    center;
     }
+
+    .copyright {
+        display: inline-block;
+        color:   #fefae0;
+        margin:  0 8px 0 0;
+    }
 }
 
 @media (min-width: 480px) {
@@ -815,16 +881,20 @@ textarea {
     }
 
     .file-preview {
-        padding: 16px;
-        margin:  0;
+        margin: 0;
+    }
+
+    .file-qr {
+        padding: 11px;
+        margin:  0 0 16px 0;
     }
 
     .file-links {
-        margin:  0;
-        padding: 16px 0 0 0;
+        margin: 0;
+        padding: 0;
     }
 
-    .file-link-view, .file-link-download {
+    .file-links > a {
         margin:  0 0 16px 0;
         padding: 16px;
     }
@@ -927,7 +997,11 @@ textarea {
         width: 256px;
     }
 
-    .file-link-view, .file-link-download {
+    .file-qr {
+        width: 210px;
+    }
+
+    .file-links > a {
         width: 200px;
     }
 
@@ -984,6 +1058,10 @@ textarea {
         color: #6A6A6A;
     }
 
+    .file-controls-info:hover, .file-controls-info:focus {
+        color: #6A6A6A;
+    }
+
     .file-controls-edit {
         display: none;
     }
@@ -999,7 +1077,17 @@ textarea {
         color:   #262;
     }
 
+    .file-controls-edit:hover, .file-controls-edit:focus {
+        display: inline-block;
+        color:   #262;
+    }
+
     .file-controls-remove {
+        display: inline-block;
+        color:   #C22;
+    }
+
+    .file-controls-remove:hover, .file-controls-remove:focus {
         display: inline-block;
         color:   #C22;
     }

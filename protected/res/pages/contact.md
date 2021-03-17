@@ -1,5 +1,5 @@
-Example
+Contact
 
 ===
 
-Lorem ipsum dolor sit amet.
+З усіх питань пишіть на електронну пошту: [inbox@sashko.me](mailto:inbox@sashko.me)

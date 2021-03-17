@@ -1,8 +1,8 @@
 protected/res/cache
 protected/res/lang/locale
 protected/res/logs
-protected/uploads
-protected/youtube
+protected/res/uploads
+protected/res/youtube
 public/thumbs
 public/qr
 public/files

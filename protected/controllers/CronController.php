@@ -6,6 +6,8 @@ class CronController extends CronControllerCore
 {
     const UPLOADS_PATH = __DIR__.'/../res/uploads/files';
 
+    const SHARE_MESSAGE = 'Нова література в хаті-читальні:';
+
     /**
      * Clean Old Files In Uploads
      */
@@ -28,7 +30,80 @@ class CronController extends CronControllerCore
      */
     public function jobShare(): void
     {
-        // To-Do
+        $fileModel = $this->getModel('file');
+        $files     = (array) $fileModel->getByShareType('telegram');
+
+        $message = mb_convert_case(static::SHARE_MESSAGE, MB_CASE_UPPER);
+
+        $files = array_slice($files, 0, 5);
+
+        foreach ($files as $file) {
+            $fileModel->saveSharedId($file->getId(), 'telegram');
+
+            $message = sprintf(
+                '%s'."\n".'[%s](%s%s)',
+                $message,
+                $file->getShortTitle(),
+                $this->currentHost,
+                $file->getLink()
+            );
+        }
+
+        if (!empty($files)) {
+            $shareConfig = $this->getConfig('share');
+
+            $telegramPlugin = $this->getPlugin('telegram');
+
+            $telegramPlugin->setCredentials($shareConfig['telegram']);
+            $telegramPlugin->send($message);
+        }
+    }
+
+    /**
+     * Generate Sitemaps
+     */
+    public function jobSitemap(): void
+    {
+        $sitemapPlugin = $this->getPlugin('sitemap');
+        $categories    = $this->getModel('category')->getAll();
+
+        $mainLinks = [];
+
+        $host = $this->currentHost;
+
+        $getFullLink = function ($vObject) use ($host) {
+            return sprintf('%s%s', $host, $vObject->getLink());
+        };
+
+        $links = [
+            sprintf('%s/', $host),
+            sprintf('%s/page/about/', $host),
+            sprintf('%s/page/contact/', $host)
+        ];
+
+        $sitemapPlugin->saveLinksToSitemap('main', $links);
+
+        $mainLinks[] = 'main';
+
+        foreach ($categories as $category) {
+            $links = [];
+            $files = (array) $category->getFiles();
+
+            if (empty($files) && empty($category->getChildren())) {
+                continue;
+            }
+
+            $links   = array_map($getFullLink, $files);
+            $links[] = $getFullLink($category);
+
+            $categorySlug = $category->getSlug();
+
+            $sitemapPlugin->saveLinksToSitemap($categorySlug, $links);
+
+            $mainLinks[] = $categorySlug;
+        }
+
+        $sitemapPlugin->saveSummarySitemap('sitemap', $mainLinks, $host);
     }
 
     /**

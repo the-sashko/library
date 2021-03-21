@@ -101,11 +101,11 @@ CREATE TABLE "files" (
 CREATE TABLE "share" (
     "id"         integer DEFAULT nextval('share_id_seq') NOT NULL,
     "id_file"    integer NOT NULL,
-    "share_type" share_type NOT NULL,
+    "type"       share_type NOT NULL,
     "cdate"      timestamp DEFAULT now() NOT NULL,
 
     CONSTRAINT "share_id" PRIMARY KEY ("id"),
-    CONSTRAINT "share_id_file_share_type" UNIQUE ("id_file", "share_type"),
+    CONSTRAINT "share_id_file_type" UNIQUE ("id_file", "type"),
 
     CONSTRAINT "share_id_file_fkey"
     FOREIGN KEY (id_file) REFERENCES files(id)
@@ -156,7 +156,7 @@ ON "files" USING btree ("slug", "is_active");
 
 CREATE INDEX "share_id_file" ON "share" USING btree ("id_file");
 
-CREATE INDEX "share_share_type" ON "share" USING btree ("share_type");
+CREATE INDEX "share_type" ON "share" USING btree ("type");
 
 CREATE INDEX "users_email_is_active"
 ON "users" USING btree ("email", "is_active");
@@ -178,5 +178,5 @@ INSERT INTO "cron_jobs" (
 ) VALUES
 (1, 'translations', 36000, 0, 't', 't', NULL),
 (2, 'uploads',      600,   0, 't', 't', NULL),
-(3, 'share',        300,   0, 't', 't', NULL),
+(3, 'share',        1800,  0, 't', 't', NULL),
 (4, 'sitemap',      900,   0, 't', 't', NULL);

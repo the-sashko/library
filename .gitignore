@@ -4,10 +4,13 @@ protected/res/logs
 protected/res/uploads
 protected/res/youtube
 public/thumbs
-public/qr
-public/files
 protected/config/cron.json
 protected/config/crypt.json
 protected/config/database.json
 protected/config/share.json
+public/thumbs
+public/qr
+public/files
+public/xml
+public/sitemap.xml
 

@@ -5,7 +5,7 @@
  */
 class Category extends ModelCore
 {
-    const ERROR_CAN_NOT_REMOVE_CATEGORY ='Can Not Remove Category (ID: %d)';
+    const ERROR_CAN_NOT_REMOVE_CATEGORY = 'Can Not Remove Category (ID: %d)';
 
     const EMPTY_SLUG_VALUE = 'empty';
 
@@ -13,7 +13,8 @@ class Category extends ModelCore
         'add',
         'all',
         'edit',
-        'remove'
+        'remove',
+        'main'
     ];
 
     /**

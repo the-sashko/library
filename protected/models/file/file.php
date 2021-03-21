@@ -261,6 +261,49 @@ class File extends ModelCore
     }
 
     /**
+     * Get Files By Share Type
+     *
+     * @param string|null $type Share Type
+     *
+     * @return array|null List Of Files
+     */
+    public function getByShareType(?string $type = null): ?array
+    {
+        if (empty($type)) {
+            return null;
+        }
+
+        $rows = $this->store->getRowsByShareType($type);
+
+        if (empty($rows)) {
+            return null;
+        }
+
+        return $this->getVOArray($rows);
+    }
+
+    /**
+     * Save Shared File ID
+     *
+     * @param int|null    $id   File ID
+     * @param string|null $type Share Type
+     *
+     * @return bool Is Shared File ID Successfully Saved
+     */
+    public function saveSharedId(?int $id = null, ?string $type = null): bool
+    {
+        if (empty($id)) {
+            return null;
+        }
+
+        if (empty($type)) {
+            return null;
+        }
+
+        return $this->store->insertSharedFileId($id, $type);
+    }
+
+    /**
      * Update File Views
      *
      * @param FileValuesObject|null $fileVO File Values Object

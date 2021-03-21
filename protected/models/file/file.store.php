@@ -6,6 +6,8 @@ class FileStore extends ModelStoreCore
 {
     const TABLE_FILES = 'files';
 
+    const TABLE_SHARE = 'share';
+
     /**
      * @var string Database Queries Cache Scope
      */
@@ -25,6 +27,36 @@ class FileStore extends ModelStoreCore
         }
 
         return $this->addRow(static::TABLE_FILES, $row);
+    }
+
+    /**
+     * Insert Shared File ID
+     *
+     * @param int|null    $id   File ID
+     * @param string|null $type Share Type
+     *
+     * @return bool Is Shared File ID Successfully Inserted
+     */
+    public function insertSharedFileId(
+        ?int    $id   = null,
+        ?string $type = null
+    ): bool
+    {
+        if (empty($id)) {
+            return false;
+        }
+
+        if (empty($type)) {
+            return false;
+        }
+
+        $row = [
+            'id_file' => $id,
+            'type'    => $type,
+            'cdate'   => date('Y-m-d H:i:s')
+        ];
+
+        return $this->addRow(static::TABLE_SHARE, $row);
     }
 
     /**
@@ -64,7 +96,7 @@ class FileStore extends ModelStoreCore
      *
      * @param int|null $categoryId Category ID
      *
-     * @return array|null File Row
+     * @return array|null File Rows
      */
     public function getRowsByCategoryId(?int $categoryId = null): ?array
     {
@@ -82,6 +114,39 @@ class FileStore extends ModelStoreCore
         ';
 
         $sql = sprintf($sql, static::TABLE_FILES, $categoryId);
+
+        $rows = $this->getRows($sql);
+
+        if (empty($rows)) {
+            return null;
+        }
+
+        return $rows;
+    }
+
+    /**
+     * Get Files By Share Type
+     *
+     * @param string|null $type Share Type
+     *
+     * @return array|null File Rows
+     */
+    public function getRowsByShareType(?string $type = null): ?array
+    {
+        if (empty($type)) {
+            return null;
+        }
+
+        $sql = '
+            SELECT DISTINCT
+                "files".*
+            FROM "%s" AS files
+            LEFT JOIN "%s" AS share ON "share"."id_file" = "files"."id" AND
+                "share"."type" = \'%s\'
+            WHERE "share"."id" IS NULL
+        ';
+
+        $sql = sprintf($sql, static::TABLE_FILES, static::TABLE_SHARE, $type);
 
         $rows = $this->getRows($sql);
 

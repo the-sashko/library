@@ -10,11 +10,11 @@ class Category extends ModelCore
     const EMPTY_SLUG_VALUE = 'empty';
 
     const FORBIDDEN_SLUGS = [
+        'main',
         'add',
         'all',
         'edit',
-        'remove',
-        'main'
+        'remove'
     ];
 
     /**
